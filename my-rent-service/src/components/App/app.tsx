@@ -5,7 +5,9 @@ import FavoritesPage from "../../pages/favorites-page/favorites-page";
 import ErrorPage from "../../pages/error-page/error-page";
 import OfferPage from "../../pages/offer-page/offer-page";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import { AppRoute} from "../../const";
+import { PrivateRoute } from "../private-route/private-route";
+import { AutorizationStatus } from "../../const";
 type AppMainPageProps={
     rentalOffersCount: number;
 }
@@ -15,10 +17,17 @@ function App({rentalOffersCount}: AppMainPageProps): JSX.Element{
   return(
     <Router>
       <Routes>
-        <Route path="/" element={<MainPage rentalOffersCount={rentalOffersCount} />} />
-        <Route path="/login" element={<LoginPage/>} />
-        <Route path="/offer" element={<OfferPage/>} />
-        <Route path="/favorites" element={<FavoritesPage/>} />
+        <Route path={AppRoute.Main} element={<MainPage rentalOffersCount={rentalOffersCount} />} />
+        <Route path={AppRoute.Login} element={<LoginPage/>} />
+        <Route path={AppRoute.Offer} element={<OfferPage/>} />
+        <Route path={AppRoute.Favorites} 
+          element={
+            <PrivateRoute
+              autorizationStatus={AutorizationStatus.NoAuth}>
+                <FavoritesPage/>
+            </PrivateRoute>
+            } 
+          />
         <Route path="*" element={<ErrorPage/>} />
       </Routes>
     </Router>
