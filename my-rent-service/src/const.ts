@@ -1,3 +1,4 @@
+
 const Setting= {
     rentalOffersCount:312,
 } as const;
@@ -6,7 +7,7 @@ const AppRoute ={
     Main : '/',
     Login : '/login',
     Favorites : '/favorites',
-    Offer : '/offer/id',
+    Offer : '/offer',
 } as const;
 
 const AutorizationStatus = {

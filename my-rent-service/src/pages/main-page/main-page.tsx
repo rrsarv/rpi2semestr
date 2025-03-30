@@ -1,22 +1,23 @@
 import { JSX } from "react";
-import CitiesCard from "../../components/cities-card/cities-card.tsx"
-
+import { Link } from "react-router-dom";
+import {Logo} from "../../components/logo/logo.tsx";
+import { CitiesCardList } from "../../components/cities-card-list/cities-card-list.tsx";
+import { OffersList } from "../../types/offer.ts";
 type MainPageProps ={
   rentalOffersCount: number;
+  offersList: OffersList[]
 }
 
 
 
-function MainPage({rentalOffersCount}: MainPageProps): JSX.Element {
+function MainPage({rentalOffersCount, offersList}: MainPageProps): JSX.Element {
     return(
         <div className="page page--gray page--main">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link header__logo-link--active">
-                <img className="header__logo" src="img/logo.svg" alt="Rent service logo" width="81" height="41"/>
-              </a>
+              <Logo/>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -29,9 +30,9 @@ function MainPage({rentalOffersCount}: MainPageProps): JSX.Element {
                   </a>
                 </li>
                 <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
+                  <Link to="/login" className="header__nav-link">
                     <span className="header__signout">Sign out</span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </nav>
@@ -90,20 +91,14 @@ function MainPage({rentalOffersCount}: MainPageProps): JSX.Element {
                     <use href="#icon-arrow-select"></use>
                   </svg>
                 </span>
-                <ul className="places__options places__options--custom places__options--opened">
+                <ul className="places__options places__options--custom places__options">
                   <li className="places__option places__option--active" tabIndex={0}>Popular</li>
                   <li className="places__option" tabIndex={0}>Price: low to high</li>
                   <li className="places__option" tabIndex={0}>Price: high to low</li>
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-              <CitiesCard/>
-              <CitiesCard/>
-              <CitiesCard/>
-              <CitiesCard/>
-              <CitiesCard/>
-              </div>
+              <CitiesCardList offersList={ offersList }/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

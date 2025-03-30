@@ -1,4 +1,5 @@
 import { JSX } from "react"
+
 function NearPlaces(): JSX.Element {
     return(
 <article className="near-places__card place-card">
