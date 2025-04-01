@@ -4,6 +4,8 @@ import App from './components/App/app.tsx'
 import {Setting} from "./const.ts"
 import { offers } from './mocks/offers.ts';
 import { offersList } from './mocks/offers-list.ts';
+import { reviews } from './mocks/reviews.ts';
+import '../public/css/map.css'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,8 +17,7 @@ root.render(
       rentalOffersCount = { Setting.rentalOffersCount }
       offersList = { offersList }
       offers = { offers }
+      reviewsList={reviews}
     />
   </React.StrictMode>
 )
-
-  

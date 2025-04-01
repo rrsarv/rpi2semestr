@@ -1,16 +1,31 @@
-import { JSX } from "react";
+import { JSX ,useState} from "react";
 import { Link } from "react-router-dom";
 import {Logo} from "../../components/logo/logo.tsx";
 import { CitiesCardList } from "../../components/cities-card-list/cities-card-list.tsx";
 import { OffersList } from "../../types/offer.ts";
+import Map from "../../components/map/map.tsx";
+import { CITY } from "../../mocks/city.ts"; 
+import { POINTS } from "../../mocks/points.ts";
+import MapList from "../../components/mapList/mapList.tsx";
+import { Points } from "../../types/map.ts";
+
 type MainPageProps ={
   rentalOffersCount: number;
   offersList: OffersList[]
 }
 
 
-
 function MainPage({rentalOffersCount, offersList}: MainPageProps): JSX.Element {
+  const [selectedPoint, setSelectedPoint] = useState<Points | null>(null);
+
+  const handleListItemHover = (listItemName:string) => {
+    const currentPoint = POINTS.find((point) =>
+      point.title === listItemName,
+    );
+    setSelectedPoint(currentPoint || null);
+  };
+
+
     return(
         <div className="page page--gray page--main">
       <header className="header">
@@ -91,7 +106,7 @@ function MainPage({rentalOffersCount, offersList}: MainPageProps): JSX.Element {
                     <use href="#icon-arrow-select"></use>
                   </svg>
                 </span>
-                <ul className="places__options places__options--custom places__options">
+                <ul className="places__options places__options--custom places__options--opened">
                   <li className="places__option places__option--active" tabIndex={0}>Popular</li>
                   <li className="places__option" tabIndex={0}>Price: low to high</li>
                   <li className="places__option" tabIndex={0}>Price: high to low</li>
@@ -101,7 +116,14 @@ function MainPage({rentalOffersCount, offersList}: MainPageProps): JSX.Element {
               <CitiesCardList offersList={ offersList }/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map">
+                <h1>Парки города {CITY.title}:</h1>
+                <MapList points={POINTS} onListItemHover={handleListItemHover}/>
+                <Map city={CITY}
+                points={POINTS}
+                  selectedPoint={selectedPoint}
+                  />
+              </section>
             </div>
           </div>
         </div>

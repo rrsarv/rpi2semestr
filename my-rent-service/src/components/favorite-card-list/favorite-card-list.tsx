@@ -44,3 +44,4 @@ function FavoritesCardList({offersList,city} : FavotitesCardListProps ): JSX.Ele
     }
 
 export default FavoritesCardList;
+    

@@ -58,3 +58,4 @@ function FavoritesCard({id,title,type,price,isPremium,previewImage,rating}  : Fa
     }
 
 export default FavoritesCard;
+    
